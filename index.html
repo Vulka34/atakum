@@ -180,6 +180,7 @@ async function loadThisWeek() {
     const res = await fetch(`problems/${week}.txt`);
     if (!res.ok) throw new Error('yok');
     const text = await res.text();
+    if (/^\s*</.test(text)) throw new Error('yok');
     renderProblem(parseProblemFile(text));
   } catch (e) {
     renderMessage(`Bu haftanın problemi (${week}. hafta) henüz eklenmedi. Yakında burada olacak!`);
